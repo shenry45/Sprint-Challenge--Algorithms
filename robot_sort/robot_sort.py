@@ -96,11 +96,6 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        print(self._list)
-
-        # Fill this out
-        print(self._position)
-        print(self._item)
 
         # light is off for no swap_item changes
         self.set_light_off()
@@ -108,38 +103,42 @@ class SortingRobot:
         self.swap_item()
 
         # check if robot can move right
-        while self.can_move_right() :
+        while self.can_move_right():
             #move robot right
-            print('moving right')
-            self.move_right()
+            # self.move_right()
 
-            if self.compare_item() is not None and self.compare_item() < 0:
+            if self.compare_item() == -1 or self.compare_item() is None:
                 self.swap_item()
                 self.set_light_on()
+                self.move_right()
             else:
-                self.swap_item()
+                # self.swap_item()
                 self.move_right()
 
-        
-        print('rec end pos', self._position)
-        print('rec end item', self._item)
+            print('moving right')
+            print(self._list)
+
 
         # if robot at end of list, sort again backwards
         while self.can_move_left():
-            if self.compare_item() is not None and self.compare_item() > 0:
+            if self.compare_item() == 1:
                 self.set_light_on()
                 self.swap_item()
-            else:
-                self.swap_item()
                 self.move_left()
+            else:
+                # self.swap_item()
+                self.move_left()
+            
 
+        print('left', self._list)   
 
             #move robot right
-            print('**moving left**')
-            self.move_left()
+            # self.move_left()
 
-        if self.light_is_on():
-            print(self._list)
+
+        # if self.light_is_on():
+        if self.compare_item() is not None:
+            # print(self._list)
             # re-run sort until light is not triggered
             return self.sort()
         
