@@ -115,9 +115,6 @@ class SortingRobot:
                 # self.swap_item()
                 self.move_right()
 
-            print('moving right')
-            print(self._list)
-
 
         # if robot at end of list, sort again backwards
         while self.can_move_left():
@@ -128,9 +125,6 @@ class SortingRobot:
             else:
                 # self.swap_item()
                 self.move_left()
-            
-
-        print('left', self._list)   
 
             #move robot right
             # self.move_left()
@@ -138,7 +132,6 @@ class SortingRobot:
 
         # if self.light_is_on():
         if self.compare_item() is not None:
-            # print(self._list)
             # re-run sort until light is not triggered
             return self.sort()
         
