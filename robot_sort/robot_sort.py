@@ -96,9 +96,53 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        print(self._list)
 
+        # Fill this out
+        print(self._position)
+        print(self._item)
+
+        # light is off for no swap_item changes
+        self.set_light_off()
+        # get first item immediately
+        self.swap_item()
+
+        # check if robot can move right
+        while self.can_move_right() :
+            #move robot right
+            print('moving right')
+            self.move_right()
+
+            if self.compare_item() is not None and self.compare_item() < 0:
+                self.swap_item()
+                self.set_light_on()
+            else:
+                self.swap_item()
+                self.move_right()
+
+        
+        print('rec end pos', self._position)
+        print('rec end item', self._item)
+
+        # if robot at end of list, sort again backwards
+        while self.can_move_left():
+            if self.compare_item() is not None and self.compare_item() > 0:
+                self.set_light_on()
+                self.swap_item()
+            else:
+                self.swap_item()
+                self.move_left()
+
+
+            #move robot right
+            print('**moving left**')
+            self.move_left()
+
+        if self.light_is_on():
+            print(self._list)
+            # re-run sort until light is not triggered
+            return self.sort()
+        
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
